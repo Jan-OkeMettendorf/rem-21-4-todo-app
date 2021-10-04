@@ -1,62 +1,20 @@
-import styled from 'styled-components/macro'
-import AppHeader from './components/AppHeader'
-import NewTodo from './components/NewTodo'
-import Boards from './components/Boards'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import './App.css';
+import InputToDo from './components/InputToDo/InputToDo'
+import ToDoBox from './components/ToDoBox/ToDoBox'
+import {useState} from "react";
 
-const nextStatus = {
-  OPEN: 'IN_PROGRESS',
-  IN_PROGRESS: 'DONE',
-}
+function App() {
 
-export default function App() {
-  const [todos, setTodos] = useState([])
-
-  const fetchTodos = () =>
-    axios
-      .get('/api/todo')
-      .then(response => setTodos(response.data))
-      .catch(console.error)
-
-  useEffect(() => {
-    axios
-      .get('/api/todo')
-      .then(response => setTodos(response.data))
-      .catch(console.error)
-  }, [])
-
-  const advanceTodo = todo => {
-    const advancedTodo = { ...todo, status: nextStatus[todo.status] }
-    axios
-      .put(`/api/todo/${todo.id}`, advancedTodo)
-      .then(fetchTodos)
-      .catch(console.error)
-  }
-
-  const deleteTodo = id =>
-    axios.delete(`/api/todo/${id}`).then(fetchTodos).catch(console.error)
-
-  const addTodo = description => {
-    const todo = { description, status: 'OPEN' }
-    axios.post('/api/todo', todo).then(fetchTodos).catch(console.error)
-  }
+    const [toDos, setToDos] = useState([]);
 
   return (
-    <PageLayout>
-      <AppHeader />
-      <Boards todos={todos} onAdvance={advanceTodo} onDelete={deleteTodo} />
-      <NewTodo onAdd={addTodo} />
-    </PageLayout>
-  )
+    <div className="App">
+      <header className="App-header">
+          <InputToDo />
+          <ToDoBox />
+      </header>
+    </div>
+  );
 }
 
-const PageLayout = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: min-content 1fr min-content;
-`
+export default App;

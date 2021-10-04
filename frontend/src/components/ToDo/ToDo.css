@@ -1,0 +1,23 @@
+.toDo-container {
+    padding: 5px;
+}
+
+.toDo {
+    display: flex;
+    margin: 5px;
+    width: 97%;
+    border: solid;
+    height: 100px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.toDo-button {
+    width: 100px;
+    align-self: flex-end;
+    margin: 5px;
+}
+
+.toDo-description {
+    margin: 5px;
+}
