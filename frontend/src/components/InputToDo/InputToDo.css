@@ -1,6 +1,26 @@
 .inputContainer {
     display: grid;
     grid-template-columns: 10fr 2fr;
-    margin: 5px;
+    margin: 5px 5px 5px 10px;
     gap: 5px;
+}
+
+.input-button{
+    background-color: black;
+    border: none;
+    border-radius: 2px;
+    color: turquoise;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 1px;
+}
+
+.input-textBox {
+    border: solid black;
+    background-color: turquoise;
 }

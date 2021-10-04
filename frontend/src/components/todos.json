@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "status": "OPEN",
+    "description": "Todo Nr. 1"
+  },
+  {
+    "id": 2,
+    "status": "OPEN",
+    "description": "Todo Nr. 2"
+  },
+  {
+  "id": 3,
+  "status": "IN_PROGRESS",
+  "description": "Todo Nr. 3"
+},
+  {
+  "id": 4,
+  "status": "IN_PROGRESS",
+  "description": "Todo Nr. 4"
+},
+  {
+  "id": 5,
+  "status": "DONE",
+  "description": "Todo Nr. 5"
+}
+]

@@ -1,12 +1,13 @@
-.toDo-container {
+.todo-container {
     padding: 5px;
+
 }
 
 .toDo {
     display: flex;
     margin: 5px;
     width: 97%;
-    border: solid;
+    /*border: solid;*/
     height: 100px;
     flex-direction: column;
     justify-content: space-between;
@@ -20,4 +21,8 @@
 
 .toDo-description {
     margin: 5px;
+}
+
+h2{
+    margin-left: 5px;
 }
