@@ -3,7 +3,7 @@ import Todos from "../Todos/Todos";
 
 export default function TodoList({todos, title, nextStatusTodos, deleteTodos}){
 
-    console.log('TodoList:', todos)
+    // console.log('TodoList:', todos)
 
     return (
         <div className="todo-container">

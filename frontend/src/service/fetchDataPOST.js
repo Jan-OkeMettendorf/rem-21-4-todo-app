@@ -12,7 +12,7 @@ export function fetchDataPOST(description){
         }),
     })
         .then((res) => res.json())
-        .then(json => console.log('POST:', json))
+        // .then(json => console.log('POST:', json))
         // .then(fetchDataFromBackend)
         .catch((err) => console.log('error'))
 }

@@ -1,7 +1,7 @@
 import './Todos.css'
 
 export default function Todos({todoItem, nextStatusTodos, deleteTodos}) {
-    console.log({todoItem})
+    // console.log({todoItem})
     return(
     <div className="Todos-container">
         <div className="todo-description">{todoItem.description}</div>

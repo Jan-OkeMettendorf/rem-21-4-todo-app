@@ -11,13 +11,13 @@
     border-radius: 2px;
     color: turquoise;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    margin-right: 1px;
+    margin-right: 5px;
 }
 
 .input-textBox {

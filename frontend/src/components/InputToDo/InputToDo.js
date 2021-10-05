@@ -17,13 +17,12 @@ export default function InputToDo({AddTodo}) {
         event.preventDefault()
         AddTodo(description)
         setDescription('')
-        console.log('description', description)
     })
 
     return (
         <div className="inputContainer">
-            <input type="text" name="input" className="input-textBox" value={description} onChange={changeInput} placeholder="please enter a new todo ..."/>
-            <button className="input-button" onClick={postNewTodo}>Add To do</button>
+            <input type="text" name="input" className="input-textBox" value={description} onChange={changeInput} placeholder="please enter a new task here ..."/>
+            <button className="input-button" onClick={postNewTodo}>Add task</button>
         </div>
     )
 }

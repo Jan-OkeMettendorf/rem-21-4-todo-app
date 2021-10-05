@@ -26,11 +26,11 @@ public class ToDoRepo {
             String uuid = UUID.randomUUID().toString();
             ToDo newToDo = new ToDo(uuid, toDo.getDescription(), toDo.getStatus());
             toDos.add(newToDo);
-            return toDo;
+            return newToDo;
         } else {
             ToDo newToDo = new ToDo(toDo.getId(), toDo.getDescription(), toDo.getStatus());
             toDos.add(newToDo);
-            return toDo;
+            return newToDo;
         }
     }
 

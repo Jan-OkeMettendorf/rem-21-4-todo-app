@@ -42,20 +42,28 @@ function App() {
             const todo = {description, status: 'OPEN'}
             fetchDataPOST(todo)
                 .then(getAllToDos)
-            console.log('Todo-description', todo.description)
+            // console.log('Todo-description', todo.description)
         }
     }
 
     const nextStatusTodo = todo => {
         console.log('nextStatus:', todo)
         if (todo.status === 'OPEN') {
-            const nextStatus = {...todo, status: 'IN_PROGRESS'}
-            fetchDataPUT(nextStatus)
-                .then(getAllToDos)
+            const updatedTodo = {...todo, status: 'IN_PROGRESS'}
+            fetchDataPUT(updatedTodo)
+                .then(promise => todos.map(todo => {
+                    if(todo.id === promise.id){
+                        return updatedTodo
+                    }
+                    return todo
+                }))
+                .then(data => setTodos(data))
+
         } else {
-            const nextStatus = {...todo, status: 'DONE'}
-            fetchDataPUT(nextStatus)
+            const updatedTodo = {...todo, status: 'DONE'}
+            fetchDataPUT(updatedTodo)
                 .then(getAllToDos)
+                // .then(promise => setTodos(...todos, promise))
         }
 
         //PUT-method
