@@ -19,16 +19,18 @@ function App() {
     const [todos, setTodos] = useState([]);
 
     const [mobile, setMobile] = useState(
-        window.innerWidth < 400
+        window.innerWidth < 800
     )
 
-    console.log('mobile < 400:', mobile)
+    const
+
+    console.log('mobile < 800:', mobile)
 
     window.addEventListener("resize", handleResize);
 
     function handleResize() {
         setMobile(
-            window.innerWidth < 400
+            window.innerWidth < 800
         )
     }
 
@@ -96,15 +98,14 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <Navigation mobile={mobile}/>
+                <Navigation mobile={mobile} count={count}/>
                 <Switch>
                     <header className="App-header">
+                        <InputToDo AddTodo={addNewTodo}/>
                         <Route exact path="/" >
-                            <InputToDo AddTodo={addNewTodo}/>
                             <TodoBox openTodos={todos} nextStatusTodos={nextStatusTodo} deleteTodos={deleteTodo}/>
                         </Route>
                         <Route path={["/open","/in_progress","/done"]}>
-                            <InputToDo AddTodo={addNewTodo}/>
                         </Route>
                             <RoutedTodoBox openTodos={todos} nextStatusTodos={nextStatusTodo} deleteTodos={deleteTodo}/>
                     </header>

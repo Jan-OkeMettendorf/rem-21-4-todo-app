@@ -1,29 +1,18 @@
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import styled from "styled-components";
 
-export function Navigation({mobile}) {
+export function Navigation({mobile, count}) {
     return (
         <nav>
             {!mobile ?
                 <StyledUl mobile={mobile}>
-
-                    <li>
-                        <StyledLink to="/">HOME</StyledLink>
-                    </li>
-
+                    <StyledNavLink to="/">HOME</StyledNavLink>
                 </StyledUl>
                 :
                 <StyledUl mobile={mobile}>
-                    <li>
-                        <StyledLink to="/open">OPEN</StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink to="/in_progress">IN PROGRESS</StyledLink>
-                    </li>
-                    <li>
-                        <StyledLink to="/done">DONE</StyledLink>
-                    </li>
-
+                    <StyledNavLink to="/open">OPEN {"/"+count.open}</StyledNavLink>
+                    <StyledNavLink to="/in_progress">IN PROGRESS{"/"+count.inProgress}</StyledNavLink>
+                    <StyledNavLink to="/done">DONE{"/"+count.done}</StyledNavLink>
                 </StyledUl>
             }
         </nav>
@@ -33,12 +22,16 @@ export function Navigation({mobile}) {
 const StyledUl = styled.ul`
 
   display: flex;
-  flex-direction: ${props.mobile ? "column" : "row"};
-  justify-content: space-evenly;
+  flex-direction: ${props => props.mobile ? "column" : "row"};
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: 5px;
+;
 
 `
 
-const StyledLink = styled(Link)`
+const StyledNavLink = styled(NavLink)`
   &:hover {
     background-color: darkslategray;
     cursor: pointer;
@@ -52,5 +45,7 @@ const StyledLink = styled(Link)`
   background-color: black;
   padding: 2px 20px 2px 20px;
   border-radius: 5px;
+  text-align: center;
+  width: 300px;
 `
 

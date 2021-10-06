@@ -10,18 +10,24 @@ export default function InputToDo({AddTodo}) {
         setDescription(event.target.value)
     }
 
-    const postNewTodo = ((event) => {
+    const postNewTodo = (event) => {
         if(description !== "") {
             setDescription(description)
         }
         event.preventDefault()
         AddTodo(description)
         setDescription('')
-    })
+    }
 
     return (
         <div className="inputContainer">
-            <input type="text" name="input" className="input-textBox" value={description} onChange={changeInput} placeholder="please enter a new task here ..."/>
+            <input type="text"
+                   name="input"
+                   className="input-textBox"
+                   value={description}
+                   onSubmit={postNewTodo}
+                   onChange={changeInput}
+                   placeholder="please enter a new task here ..."/>
             <button className="input-button" onClick={postNewTodo}>Add task</button>
         </div>
     )
