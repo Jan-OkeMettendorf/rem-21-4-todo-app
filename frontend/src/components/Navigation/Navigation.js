@@ -10,9 +10,9 @@ export function Navigation({mobile, count}) {
                 </StyledUl>
                 :
                 <StyledUl mobile={mobile}>
-                    <StyledNavLink to="/open">OPEN {"/"+count.open}</StyledNavLink>
-                    <StyledNavLink to="/in_progress">IN PROGRESS{"/"+count.inProgress}</StyledNavLink>
-                    <StyledNavLink to="/done">DONE{"/"+count.done}</StyledNavLink>
+                    <StyledNavLink to="/open">OPEN {" ("+count.open+")"}</StyledNavLink>
+                    <StyledNavLink to="/in_progress">IN PROGRESS{" ("+count.in_progress+")"}</StyledNavLink>
+                    <StyledNavLink to="/done">DONE{" ("+count.done+")"}</StyledNavLink>
                 </StyledUl>
             }
         </nav>

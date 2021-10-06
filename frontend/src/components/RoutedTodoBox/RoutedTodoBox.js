@@ -8,8 +8,6 @@ export default function TodoBox({openTodos, nextStatusTodos, deleteTodos}) {
     const todosInProgress   = openTodos.filter(todo => todo.status === 'IN_PROGRESS')
     const doneTodos         = openTodos.filter(todo => todo.status === 'DONE')
 
-    console.log('todoBox',todos)
-
     return (
 
             <div className="toDoBox-container">

@@ -1,6 +1,6 @@
 import './App.css';
+import styled from "styled-components"
 import InputToDo from './components/InputToDo/InputToDo'
-import TodoBox from './components/TodoBox/TodoBox'
 import RoutedTodoBox from './components/RoutedTodoBox/RoutedTodoBox'
 import {useEffect, useState} from "react";
 import {fetchDataFromBackend} from "./service/fetchDataFromBackend";
@@ -9,20 +9,25 @@ import {fetchDataDELETE} from "./service/fetchDataDELETE";
 import {fetchDataPUT} from "./service/fetchDataPUT";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {Navigation} from "./components/Navigation/Navigation";
+import TodoList from "./components/TodoList/TodoList";
+import DetailPage from "./components/DetailPage/DetailPage";
 
 
 
 function App() {
-
     //cons variables
 
-    const [todos, setTodos] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
     const [mobile, setMobile] = useState(
         window.innerWidth < 800
     )
 
-    const
+    const openTasks         = tasks.filter(todo => todo.status === 'OPEN')
+    const inProgressTasks   = tasks.filter(todo => todo.status === 'IN_PROGRESS')
+    const doneTasks         = tasks.filter(todo => todo.status === 'DONE')
+
+    const count = {open: openTasks.length, in_progress: inProgressTasks.length , done: doneTasks.length}
 
     console.log('mobile < 800:', mobile)
 
@@ -37,10 +42,9 @@ function App() {
     // methods/functions
 
     useEffect(() => {
-
             fetchDataFromBackend()
                 .then(response => {
-                    setTodos(response)
+                    setTasks(response)
                 })
                 .catch((error) => console.log(error))
         }
@@ -50,7 +54,7 @@ function App() {
     const getAllToDos = () => {
         fetchDataFromBackend()
             .then(response => {
-                setTodos(response)
+                setTasks(response)
             })
             .catch((error) => console.log(error))
     }
@@ -64,18 +68,20 @@ function App() {
         }
     }
 
+    const deleteTodo = id => {
+        console.log('id: ', id)
+        fetchDataDELETE(id)
+            .then(getAllToDos)
+            .catch(error => console.log(error))
+    }
+
+    // What is this?
     const nextStatusTodo = todo => {
         console.log('nextStatus:', todo)
         if (todo.status === 'OPEN') {
             const updatedTodo = {...todo, status: 'IN_PROGRESS'}
             fetchDataPUT(updatedTodo)
-                .then(promise => todos.map(todo => {
-                    if (todo.id === promise.id) {
-                        return updatedTodo
-                    }
-                    return todo
-                }))
-                .then(data => setTodos(data))
+                .then(getAllToDos)
                 .catch(error => console.log(error))
 
         } else {
@@ -88,12 +94,6 @@ function App() {
 
     }
 
-    const deleteTodo = id => {
-        console.log('id: ', id)
-        fetchDataDELETE(id)
-            .then(getAllToDos)
-            .catch(error => console.log(error))
-    }
 
     return (
         <Router>
@@ -103,11 +103,16 @@ function App() {
                     <header className="App-header">
                         <InputToDo AddTodo={addNewTodo}/>
                         <Route exact path="/" >
-                            <TodoBox openTodos={todos} nextStatusTodos={nextStatusTodo} deleteTodos={deleteTodo}/>
+                            <StyledThreeLists>
+                                <TodoList title={'OPEN'} todos={openTasks} nextStatusTodos={nextStatusTodo}/>
+                                <TodoList title={'IN PROGRESS'} todos={inProgressTasks} nextStatusTodos={nextStatusTodo}/>
+                                <TodoList title={'DONE'} todos={doneTasks} deleteTodos={deleteTodo}/>
+                            </StyledThreeLists>
                         </Route>
-                        <Route path={["/open","/in_progress","/done"]}>
+                        <RoutedTodoBox openTodos={openTasks} nextStatusTodos={nextStatusTodo} deleteTodos={deleteTodo}/>
+                        <Route path={"/todo/:id"}>
+                            <DetailPage/>
                         </Route>
-                            <RoutedTodoBox openTodos={todos} nextStatusTodos={nextStatusTodo} deleteTodos={deleteTodo}/>
                     </header>
                 </Switch>
             </div>
@@ -116,3 +121,10 @@ function App() {
 }
 
 export default App;
+
+const StyledThreeLists = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 20px;
+  height: 100vh;
+`
