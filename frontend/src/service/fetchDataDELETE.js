@@ -1,7 +1,6 @@
+import axios from "axios";
+
 export function fetchDataDELETE(id){
     // console.log('id:',id)
-    return fetch(`api/todo/${id}`, {
-        method: 'DELETE',
-    })
-
+    return axios.delete(`api/todo/${id}`)
 }

@@ -10,11 +10,13 @@ export default function TodoBox({openTodos, nextStatusTodos, deleteTodos}) {
     console.log('todoBox',todos)
 
     return (
+
         <div className="toDoBox-container">
             <TodoList title={'OPEN'} todos={todos} nextStatusTodos={nextStatusTodos}/>
             <TodoList title={'IN PROGRESS'} todos={todosInProgress} nextStatusTodos={nextStatusTodos}/>
             <TodoList title={'DONE'} todos={doneTodos} deleteTodos={deleteTodos}/>
         </div>
+
     )
 
 }
