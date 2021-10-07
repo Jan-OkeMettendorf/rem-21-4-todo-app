@@ -22,13 +22,14 @@ public class ToDoService {
         return toDoRepo.getAllToDos();
     }
 
-//    public ToDo getToDoById(String id){
-//        Optional<ToDo> searchedToDo = toDoRepo.getToDoById(id);
-//        if(searchedToDo.isPresent()){
-//            return toDoRepo.getToDoById(id).get();
-//        }
-//        throw new IllegalArgumentException("No todo found by such an id:" + id);
-//    }
+    public ToDo getToDoById(String id){
+        System.out.println(toDoRepo.getToDoById("ef668714-1dc3-43cc-8e5a-5195410dbfd2"));
+        Optional<ToDo> searchedToDo = toDoRepo.getToDoById(id);
+        if(searchedToDo.isPresent()){
+            return searchedToDo.get();
+        }
+        throw new IllegalArgumentException("No todo found by such an id:" + id);
+    }
 
     public ToDo addToDo(ToDo toDo) {
         return toDoRepo.addToDo(toDo);

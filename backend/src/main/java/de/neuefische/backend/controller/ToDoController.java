@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("api/todo")
+//@RequestMapping("")
 @Data
 @RequiredArgsConstructor
 public class ToDoController {
@@ -25,11 +25,12 @@ public class ToDoController {
         return toDoService.getAllToDos();
     }
 
-//    @GetMapping("api/todo/{id}")
-//    public ToDo getToDoById(@PathVariable String id){
-//        System.out.println("GetID");
-//        return toDoService.getToDoById(id);
-//    }
+    @GetMapping("/todo/details/api/todo/{id}")
+    public ToDo getToDoById(@PathVariable String id){
+        System.out.println("GetID: " + id);
+        System.out.println(toDoService.getToDoById("ef668714-1dc3-43cc-8e5a-5195410dbfd2"));
+        return toDoService.getToDoById(id);
+    }
 
     @PostMapping("api/todo")
     public ToDo addToDo(@RequestBody ToDo toDo) {

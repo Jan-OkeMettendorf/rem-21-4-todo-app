@@ -67,6 +67,13 @@ class ToDoControllerTest {
     }
 
     @Test
+    public void testGetTodoById(){
+        System.out.println(toDoRepo.getAllToDos());
+        System.out.println(toDoRepo.getToDoById("f2be701e-cb47-4eb7-971a-aae15131447b"));
+
+    }
+
+    @Test
     public void testAddToDo() {
 
         //GIVEN

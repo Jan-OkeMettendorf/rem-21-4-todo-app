@@ -1,7 +1,6 @@
 import './App.css';
-import styled from "styled-components"
-import InputToDo from './components/InputToDo/InputToDo'
-import RoutedTodoBox from './components/RoutedTodoBox/RoutedTodoBox'
+
+import InputToDo from './components/InputToDo/InputToDo';
 import {useEffect, useState} from "react";
 import {fetchDataFromBackend} from "./service/fetchDataFromBackend";
 import {fetchDataPOST} from "./service/fetchDataPOST";
@@ -9,9 +8,9 @@ import {fetchDataDELETE} from "./service/fetchDataDELETE";
 import {fetchDataPUT} from "./service/fetchDataPUT";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {Navigation} from "./components/Navigation/Navigation";
-import TodoList from "./components/TodoList/TodoList";
 import DetailPage from "./components/DetailPage/DetailPage";
-
+import Homepage from "./components/Homepage";
+import TodoBoard from "./components/TodoBoard/TodoBoard";
 
 
 function App() {
@@ -22,14 +21,6 @@ function App() {
     const [mobile, setMobile] = useState(
         window.innerWidth < 800
     )
-
-    const openTasks         = tasks.filter(todo => todo.status === 'OPEN')
-    const inProgressTasks   = tasks.filter(todo => todo.status === 'IN_PROGRESS')
-    const doneTasks         = tasks.filter(todo => todo.status === 'DONE')
-
-    const count = {open: openTasks.length, in_progress: inProgressTasks.length , done: doneTasks.length}
-
-    console.log('mobile < 800:', mobile)
 
     window.addEventListener("resize", handleResize);
 
@@ -98,19 +89,25 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <Navigation mobile={mobile} count={count}/>
+                <Navigation mobile={mobile} tasks={tasks}/>
                 <Switch>
                     <header className="App-header">
                         <InputToDo AddTodo={addNewTodo}/>
-                        <Route exact path="/" >
-                            <StyledThreeLists>
-                                <TodoList title={'OPEN'} todos={openTasks} nextStatusTodos={nextStatusTodo}/>
-                                <TodoList title={'IN PROGRESS'} todos={inProgressTasks} nextStatusTodos={nextStatusTodo}/>
-                                <TodoList title={'DONE'} todos={doneTasks} deleteTodos={deleteTodo}/>
-                            </StyledThreeLists>
+                        <Route  path="/" exact>
+                            <Homepage
+                                todos={tasks}
+                                onAdvance={nextStatusTodo}
+                                onDelete={deleteTodo}
+                            />
                         </Route>
-                        <RoutedTodoBox openTodos={openTasks} nextStatusTodos={nextStatusTodo} deleteTodos={deleteTodo}/>
-                        <Route path={"/todo/:id"}>
+                        <Route path="/:statusSlug">
+                            <TodoBoard
+                                todos={tasks}
+                                onAdvance={nextStatusTodo}
+                                onDelete={deleteTodo}
+                            />
+                        </Route>
+                        <Route path={"/todo/details/:id"}>
                             <DetailPage/>
                         </Route>
                     </header>
@@ -122,9 +119,4 @@ function App() {
 
 export default App;
 
-const StyledThreeLists = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 20px;
-  height: 100vh;
-`
+

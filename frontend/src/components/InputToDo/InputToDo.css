@@ -8,7 +8,7 @@
 .input-button{
     background-color: black;
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
     color: turquoise;
     font-weight: bold;
     padding: 5px;
@@ -23,4 +23,5 @@
 .input-textBox {
     border: solid black;
     background-color: turquoise;
+    border-radius: 5px;
 }

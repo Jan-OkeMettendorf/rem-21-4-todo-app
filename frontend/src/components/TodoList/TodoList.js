@@ -1,7 +1,8 @@
 import './TodoList.css'
 import Todos from "../Todos/Todos";
+import styled from "styled-components/macro";
 
-export default function TodoList({todos, title, nextStatusTodos, deleteTodos}){
+export default function TodoList({todos, title, onAdvance, onDelete}){
 
     // console.log('TodoList:', todos)
 
@@ -11,12 +12,16 @@ export default function TodoList({todos, title, nextStatusTodos, deleteTodos}){
             <div className="todoList">
                 {todos.map(
                     todo => (
-                        <li key={todo.id}>
-                            <Todos todoItem={todo} nextStatusTodos={nextStatusTodos} deleteTodos={deleteTodos}/>
-                        </li>
+                        <StyledLi key={todo.id}>
+                            <Todos todoItem={todo} nextStatusTodos={onAdvance} deleteTodos={onDelete}/>
+                        </StyledLi>
                     )
                 )}
             </div>
         </div>
     )
 }
+
+const StyledLi = styled.li`
+    list-style-type: none;
+`

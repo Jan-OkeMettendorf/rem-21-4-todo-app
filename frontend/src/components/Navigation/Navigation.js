@@ -1,17 +1,29 @@
 import {Link, NavLink} from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components/macro";
+import {useEffect} from "react";
+import {fetchDataFromBackend} from "../../service/fetchDataFromBackend";
 
-export function Navigation({mobile, count}) {
+export function Navigation({mobile, tasks}) {
+
+    const filteredOpenTasks = tasks.filter(task => task.status === 'OPEN').length
+    const filteredInProgressTasks = tasks.filter(task => task.status === 'IN_PROGRESS').length
+    const filteredDoneTasks = tasks.filter(task => task.status === 'DONE').length
+
+    const count = {open: filteredOpenTasks, inProgress: filteredInProgressTasks , done: filteredDoneTasks}
+
     return (
         <nav>
             {!mobile ?
                 <StyledUl mobile={mobile}>
                     <StyledNavLink to="/">HOME</StyledNavLink>
+                    <StyledNavLink to="/open">OPEN {" ("+count.open+")"}</StyledNavLink>
+                    <StyledNavLink to="/in-progress">IN PROGRESS{" ("+count.inProgress+")"}</StyledNavLink>
+                    <StyledNavLink to="/done">DONE{" ("+count.done+")"}</StyledNavLink>
                 </StyledUl>
                 :
                 <StyledUl mobile={mobile}>
                     <StyledNavLink to="/open">OPEN {" ("+count.open+")"}</StyledNavLink>
-                    <StyledNavLink to="/in_progress">IN PROGRESS{" ("+count.in_progress+")"}</StyledNavLink>
+                    <StyledNavLink to="/in-progress">IN PROGRESS{" ("+count.inProgress+")"}</StyledNavLink>
                     <StyledNavLink to="/done">DONE{" ("+count.done+")"}</StyledNavLink>
                 </StyledUl>
             }
@@ -27,6 +39,7 @@ const StyledUl = styled.ul`
   justify-items: center;
   align-items: center;
   gap: 5px;
+  padding-right: 40px;
 ;
 
 `
